@@ -53,3 +53,13 @@ reorder_level INTEGER DEFAULT 0,
 )
 ''')
 
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS vehicles (
+id INTEGER PRIMARY KEY,
+registration TEXT NOT NULL,
+capacity INTEGER NOT NULL,
+maintenance_date TEXT NOT NULL,
+status TEXT NOT NULL,'
+)
+''')
+
