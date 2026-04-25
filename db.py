@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
 id INTEGER PRIMARY KEY,
 username TEXT NOT NULL,
 password TEXT NOT NULL,
-role TEXT NOT NULL,
+role TEXT NOT NULL
 )
 ''')
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS warehouses (
 id INTEGER PRIMARY KEY,
 name TEXT NOT NULL,
 address_encrypted TEXT NOT NULL,
-phone TEXT NOT NULL,
+phone TEXT NOT NULL
 )
 ''')
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS items (
 id INTEGER PRIMARY KEY,
 name TEXT NOT NULL,
 description TEXT NOT NULL,
-reorder_level INTEGER DEFAULT 0,
+reorder_level INTEGER DEFAULT 0
 )
 ''')
 
@@ -59,7 +59,7 @@ id INTEGER PRIMARY KEY,
 registration TEXT NOT NULL,
 capacity INTEGER NOT NULL,
 maintenance_date TEXT NOT NULL,
-status TEXT NOT NULL,'
+status TEXT NOT NULL
 )
 ''')
 
@@ -70,7 +70,7 @@ name TEXT NOT NULL,
 license_number TEXT NOT NULL,
 phone_encrypted TEXT NOT NULL,
 address_encrypted TEXT NOT NULL,
-active INTEGER NOT NULL,
+active INTEGER NOT NULL
 )
 ''')
 
@@ -101,7 +101,9 @@ status TEXT NOT NULL DEFAULT 'in_transit',
 created_at TEXT NOT NULL,
 expected_delivery_date TEXT,
 FOREIGN KEY (origin_warehouse_id) REFERENCES warehouses (id)
-FOREIGN KEY (destination_warehouse_id) REFERENCES warehouses (id)''')
+FOREIGN KEY (destination_warehouse_id) REFERENCES warehouses (id)
+)
+''')
 
     cur.execute('''
 CREATE TABLE IF NOT EXISTS delivery_records (
@@ -118,3 +120,27 @@ FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
 FOREIGN KEY (shipment_id) REFERENCES shipments (id)
 )
 ''')
+
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS warehouse_activity_logs (
+id INTEGER PRIMARY KEY,
+warehouse_id INTEGER NOT NULL,
+activity_type TEXT NOT NULL,
+item_id INTEGER,
+quantity_changed INTEGER,
+related_shipment_id INTEGER,
+timestamp TEXT NOT NULL,
+performed_by_user_id INTEGER,
+FOREIGN KEY (warehouse_id) REFERENCES warehouses (id)
+FOREIGN KEY (item_id) REFERENCES items (id)
+FOREIGN KEY (related_shipment_id) REFERENCES shipments (id)
+FOREIGN KEY (performed_by_user_id) REFERENCES users (id)
+)
+''')
+
+    conn.commit()
+    conn.close()
+
+if __name__ == "__main__":
+    init_db()
+    print("Database created")
