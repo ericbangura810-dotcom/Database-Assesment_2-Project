@@ -141,3 +141,7 @@ FOREIGN KEY (performed_by_user_id) REFERENCES users (id)
     conn.commit()
     conn.close()
 
+if __name__ == '__main__':
+    init_db()
+    print('Database created.')
+
