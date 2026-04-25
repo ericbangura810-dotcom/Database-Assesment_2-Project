@@ -63,3 +63,16 @@ status TEXT NOT NULL,'
 )
 ''')
 
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS drivers (
+id INTEGER PRIMARY KEY,
+name TEXT NOT NULL,
+license_number TEXT NOT NULL,
+phone_encrypted TEXT NOT NULL,
+address_encrypted TEXT NOT NULL,
+active INTEGER NOT NULL,
+)
+''')
+
+    cur.execute('''
+''')
