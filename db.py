@@ -75,4 +75,16 @@ active INTEGER NOT NULL,
 ''')
 
     cur.execute('''
+CREATE TABLE IF NOT EXISTS driver_assignments (
+id INTEGER PRIMARY KEY,
+driver_id INTEGER NOT NULL,
+vehicle_id INTEGER NOT NULL,
+shift_start TEXT NOT NULL,
+shift_end TEXT NOT NULL,
+route_description TEXT NOT NULL,
+FOREIGN KEY (driver_id) REFERENCES drivers (id)
+FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
+)
 ''')
+
+    cur.execute('''''')
