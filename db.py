@@ -87,4 +87,21 @@ FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
 )
 ''')
 
-    cur.execute('''''')
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS shipments (
+id INTEGER PRIMARY KEY,
+order_number TEXT NOT NULL,
+sender_name TEXT NOT NULL,
+receiver_name TEXT NOT NULL,
+receiver_address TEXT NOT NULL,
+item_description TEXT,
+origin_warehouse_id INTEGER,
+destination_warehouse_id INTEGER,
+status TEXT NOT NULL DEFAULT 'in_transit',
+created_at TEXT NOT NULL,
+expected_delivery_date TEXT,
+FOREIGN KEY (origin_warehouse_id) REFERENCES warehouses (id)
+FOREIGN KEY (destination_warehouse_id) REFERENCES warehouses (id)''')
+
+    cur.execute('''
+    ''')
