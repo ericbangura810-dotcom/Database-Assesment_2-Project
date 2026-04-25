@@ -16,7 +16,7 @@ def init_db():
     cur = conn.cursor()
 
     cur.execute('''
-Create TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users (
 id INTEGER PRIMARY KEY,
 username TEXT NOT NULL,
 password TEXT NOT NULL,
@@ -104,4 +104,17 @@ FOREIGN KEY (origin_warehouse_id) REFERENCES warehouses (id)
 FOREIGN KEY (destination_warehouse_id) REFERENCES warehouses (id)''')
 
     cur.execute('''
-    ''')
+CREATE TABLE IF NOT EXISTS delivery_records (
+id INTEGER PRIMARY KEY,
+shipment_id INTEGER NOT NULL,
+driver_id INTEGER NOT NULL,
+vehicle_id INTEGER NOT NULL,
+route_details TEXT NOT NULL,
+assigned_at TEXT NOT NULL,
+delivered_at TEXT NOT NULL,
+current_status TEXT NOT NULL,
+FOREIGN KEY (driver_id) REFERENCES drivers (id)
+FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
+FOREIGN KEY (shipment_id) REFERENCES shipments (id)
+)
+''')
