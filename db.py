@@ -44,3 +44,12 @@ FOREIGN KEY (item_id) REFERENCES items (id)
 )
 ''')
 
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS items (
+id INTEGER PRIMARY KEY,
+name TEXT NOT NULL,
+description TEXT NOT NULL,
+reorder_level INTEGER DEFAULT 0,
+)
+''')
+
