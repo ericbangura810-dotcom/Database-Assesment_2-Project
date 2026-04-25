@@ -15,4 +15,32 @@ def init_db():
     conn = get_connection()
     cur = conn.cursor()
 
+    cur.execute('''
+Create TABLE IF NOT EXISTS users (
+id INTEGER PRIMARY KEY,
+username TEXT NOT NULL,
+password TEXT NOT NULL,
+role TEXT NOT NULL,
+)
+''')
+
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS warehouses (
+id INTEGER PRIMARY KEY,
+name TEXT NOT NULL,
+address_encrypted TEXT NOT NULL,
+phone TEXT NOT NULL,
+)
+''')
+
+    cur.execute('''
+CREATE TABLE IF NOT EXISTS warehouse_inventory (
+id INTEGER PRIMARY KEY,
+warehouse_id INTEGER NOT NULL,
+item_id INTEGER NOT NULL,
+quantity INTEGER NOT NULL DEFAULT 0,
+FOREIGN KEY (warehouse_id) REFERENCES warehouses (id)
+FOREIGN KEY (item_id) REFERENCES items (id)
+)
+''')
 
