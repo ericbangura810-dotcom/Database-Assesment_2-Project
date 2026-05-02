@@ -28,7 +28,7 @@ def add_shipment(order_number, sender_name, sender_address_encrypted,
     conn.close()
     return shipment_id
 
-def update_shipment_statuss(shipment_id, status):
+def update_shipment_status(shipment_id, status):
     conn = get_connection()
     conn.execute("""
     UPDATE shipments
