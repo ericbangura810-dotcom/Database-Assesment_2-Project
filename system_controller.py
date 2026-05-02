@@ -18,6 +18,12 @@ class NorthshoreSystem:
         if not user_has_role(self.user, role):
             raise Exception(f"User does not have required role: {role}")
 
+    def create_shipment(self, **kwargs):
+        if not (user_has_role(self.user, "manager") or user_has_role(self.user, "admin")):
+            raise Exception("Only managers or admins can create shipments.")
+
+
+
 
 
 
