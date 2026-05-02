@@ -41,6 +41,12 @@ class NorthshoreSystem:
 
         return get_shipment(shipment_id)
 
+    def assign_driver(self, shipment_id, driver_id, vehicle_id, route_details):
+        if not (user_has_role(self.user, "manager") or user_has_role(self.user, "admin")):
+            raise Exception("Only managers or admins can assign drivers.")
+
+        assign_driver_to_shipment(shipment_id, driver_id, vehicle_id, route_details)
+
 
 
 
