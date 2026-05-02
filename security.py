@@ -20,7 +20,6 @@ def decrypt_text(text):
     return "".join(chr(ord(c) ^ KEY) for c in text)
 
 def create_user(username, password, role):
-
     conn = get_connection()
     cur = conn.cursor()
 
@@ -33,5 +32,23 @@ def create_user(username, password, role):
 
     conn.commit()
     conn.close()
+
+def authenticate(username, password):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = cur.fetchone()
+
+    conn.close()
+
+    if user is None:
+        return None
+
+    if check_password(password, user["password"]):
+        return user
+    else:
+        return None
+
 
 
