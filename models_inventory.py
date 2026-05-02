@@ -11,3 +11,11 @@ def adjust_inventory(warehouse_id, item_id, quantity_change, activity_type, rela
                 VALUES (?, ?, 0)
                 """, (warehouse_id, item_id))
 
+    cur.execute("""
+    UPDATE warehous_inventory 
+    SET quantity = quantity + ?
+    WHERE warehouse_id = ? AND item_id = ?
+    """, (quantity_change, warehouse_id, item_id)
+
+
+
