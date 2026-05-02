@@ -71,3 +71,11 @@ class NorthshoreSystem:
             raise Exception("Only managers or admins can view reports.")
 
         return delivery_progress_by_status()
+
+    def report_warehouse_activity(self, warehouse_id):
+        if not (user_has_role(self.user, "manager") or user_has_role(self.user, "admin")):
+            raise Exception("Only managers or admins can view reports.")
+
+        return warehouses_activity_summary(warehouse_id)
+
+
