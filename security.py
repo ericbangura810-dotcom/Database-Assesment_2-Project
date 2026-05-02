@@ -18,3 +18,20 @@ def decrypt_text(text):
     if text is None:
         return None
     return "".join(chr(ord(c) ^ KEY) for c in text)
+
+def create_user(username, password, role):
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    hashed = hash_password(password)
+
+    cur.execute("""
+    INSERT INTO users (username, password, role)
+    VALUES (?, ?, ?)
+    """, (username, hashed, role))
+
+    conn.commit()
+    conn.close()
+
+
