@@ -29,6 +29,17 @@ class NorthshoreSystem:
             raise Exception("Only managers or admins can update shipment status.")
 
 
+        update_shipment_status(shipment_id, new_status)
+
+    def view_shipment(self, shipment_id):
+        if not (
+                user_has_role(self.user, "warehouse")
+                or user_has_role(self.user, "manager")
+                or user_has_role(self.user, "admin")
+        ):
+            raise Exception("You do not have permission to view shipments.")
+
+        return get_shipment(shipment_id)
 
 
 
