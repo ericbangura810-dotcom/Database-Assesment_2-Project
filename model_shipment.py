@@ -23,6 +23,24 @@ def add_shipment(order_number, sender_name, sender_address_encrypted,
         datetime.now().isoformat(), expected_delivery_date
     ))
 
+    conn.commit()
+    shipment_id = cur.lastrowid
+    conn.close()
+    return shipment_id
+
+def update_shipment_statuss(shipment_id, status):
+    conn = get_connection()
+    conn.execute("""
+    UPDATE shipments
+    SET status = ?
+    WHERE id = ?
+    """, (status, shipment_id))
+    conn.commit()
+    conn.close()
+
+
+
+
 
 
 
