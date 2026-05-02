@@ -66,5 +66,8 @@ class NorthshoreSystem:
             performed_by_user_id=self.user["id"]
         )
 
+    def report_delivery_progress(self):
+        if not (user_has_role(self.user, "manager") or user_has_role(self.user, "admin")):
+            raise Exception("Only managers or admins can view reports.")
 
-
+        return delivery_progress_by_status()
