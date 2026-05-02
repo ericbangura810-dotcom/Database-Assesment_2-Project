@@ -47,6 +47,24 @@ class NorthshoreSystem:
 
         assign_driver_to_shipment(shipment_id, driver_id, vehicle_id, route_details)
 
+    def update_inventory(self, warehouse_id, item_id, quantity_change,
+                         activity_type, related_shipment_id=None):
+
+        if not (
+                user_has_role(self.user, "warehouse")
+                or user_has_role(self.user, "manager")
+                or user_has_role(self.user, "admin")
+        ):
+            raise Exception("You do not have permission to update inventory.")
+
+        adjust_inventory(
+            warehouse_id,
+            item_id,
+            quantity_change,
+            activity_type,
+            related_shipment_id,
+            performed_by_user_id=self.user["id"]
+        )
 
 
 
