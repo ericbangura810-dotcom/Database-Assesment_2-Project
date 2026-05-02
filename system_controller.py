@@ -22,7 +22,11 @@ class NorthshoreSystem:
         if not (user_has_role(self.user, "manager") or user_has_role(self.user, "admin")):
             raise Exception("Only managers or admins can create shipments.")
 
+        return add_shipment(**kwargs)
 
+    def change_shipment_status(self, shipment_id, new_status):
+        if not (user_has_role(self.user, "manager") or user_has_role(self.user, "admin")):
+            raise Exception("Only managers or admins can update shipment status.")
 
 
 
