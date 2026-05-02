@@ -50,5 +50,7 @@ def authenticate(username, password):
     else:
         return None
 
-
-
+def user_has_role(user, role_name):
+    if user is None:
+        return False
+    return user["role"] == role_name
