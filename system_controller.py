@@ -10,6 +10,9 @@ warehouses_activity_summary,
 vehicle_utilisation
 )
 
+class NorthshoreSystem:
+    def __init__(self, user):
+        self.user = user
 
 
 
