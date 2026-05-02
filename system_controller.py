@@ -14,6 +14,10 @@ class NorthshoreSystem:
     def __init__(self, user):
         self.user = user
 
+    def require_role(self, role):
+        if not user_has_role(self.user, role):
+            raise Exception(f"User does not have required role: {role}")
+
 
 
 
