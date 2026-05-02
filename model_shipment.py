@@ -38,6 +38,14 @@ def update_shipment_statuss(shipment_id, status):
     conn.commit()
     conn.close()
 
+def get_shipment(shipment_id):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""SELECT * FROM shipments WHERE id = ?""", (shipment_id,))
+    row = cur.fetchone()
+    conn.close()
+    return row
+
 
 
 
